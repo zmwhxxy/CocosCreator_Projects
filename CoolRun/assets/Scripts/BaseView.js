@@ -15,6 +15,7 @@ cc.Class({
        m_Hero:cc.Animation,
        m_BtRoll:cc.Button,
        m_bCanClicked:true,
+       m_Back1:cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -27,6 +28,13 @@ cc.Class({
         this.m_BtRoll.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
         this.m_BtRoll.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
         
+        var pt0 = this.m_Back1.getPosition();
+        var mt = cc.moveTo(5, -500, 0);
+        var seq = cc.sequence(mt, cc.callFunc(function(target){
+            target.setPosition(pt0);
+        }, this));
+        this.m_Back1.runAction(cc.repeatForever(seq));
+
         this.m_Hero.play('Run');
     },
 
